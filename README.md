@@ -21,3 +21,7 @@ The command line interface for the DCGAN is as follows:
     --data_path        The path to the images that should be used for training
     --model            Choose which weights to use for the generation (default: mountains)
 
+### Example
+
+    python dcgan.py --mode train --data_path images/small_flowers
+   
