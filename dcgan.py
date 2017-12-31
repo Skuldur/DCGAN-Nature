@@ -134,10 +134,10 @@ def get_generative_adversarial_network(generator, discriminator):
     model.add(discriminator)
     return model
 
-def generate(batch_size, model_weights):
+def generate(batch_size, learning_rate, beta_1, model_weights):
     """ Generate images using the trained generator """
     generator = get_generator()
-    generator.compile(loss='binary_crossentropy', optimizer="Adam")
+    generator.compile(loss='binary_crossentropy', optimizer=Adam(lr=learning_rate, beta_1=beta_1))
     generator.load_weights(model_weights)
     
     noise = numpy.random.uniform(-1, 1, (batch_size, 100))
@@ -168,4 +168,4 @@ if __name__ == "__main__":
     if args.mode == 'train':
         train(args.batch_size, args.learning_rate, args.beta_1, args.epochs, args.data_path)
     elif args.mode == 'generate':
-        generate(args.batch_size, args.model + "_generator")
+        generate(args.batch_size, args.learning_rate, args.beta_1, args.model + "_generator")
